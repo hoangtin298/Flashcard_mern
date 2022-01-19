@@ -18,12 +18,19 @@ const server = http.createServer(app);
 app.use(secureApp());
 
 // Import routes
+const userRouter = require("./routes/user.r");
+const courseRouter = require("./routes/course.r");
+const cardRouter = require("./routes/card.r");
 
 // Middle wares
 app.use(logger("dev"));
 app.use(bodyParser.json());
 
 // Routes
+app.use("/users", userRouter);
+app.use("/courses", courseRouter);
+app.use("/cards", cardRouter);
+
 app.get("/", (req, res, next) => {
   return res.status(200).json({
     message: "Server is OK",
